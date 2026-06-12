@@ -1,84 +1,302 @@
-# Real-time PM2.5 Concentration Forecasting System
+# Real-Time PM2.5 Concentration Forecasting System
 
-A real-time air quality forecasting platform designed to predict PM2.5 concentrations using statistical and deep learning models within a Big Data architecture. The system integrates data streaming, distributed processing, model inference, and interactive visualization to provide continuous air quality monitoring and forecasting.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Kafka](https://img.shields.io/badge/Apache-Kafka-black)
+![Spark](https://img.shields.io/badge/Apache-Spark-orange)
+![Cassandra](https://img.shields.io/badge/Apache-Cassandra-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-DeepLearning-orange)
+
+<div align="center">
+
+### IE212 – Big Data Technologies
+
+**University of Information Technology (UIT) – VNUHCM**
+
+---
+
+A real-time air quality forecasting system that integrates Big Data technologies and machine learning models to predict PM2.5 concentrations from environmental sensor measurements.
+
+</div>
+
+---
+
+# Introduction
+
+Air pollution has become one of the most critical environmental challenges affecting public health worldwide. Fine particulate matter (PM2.5) is particularly harmful because it can penetrate deep into the respiratory system and cause serious health issues.
+
+This project develops an end-to-end real-time forecasting platform capable of:
+
+* Ingesting environmental data streams.
+* Processing data using distributed computing technologies.
+* Predicting future PM2.5 concentrations.
+* Visualizing forecasting results through an interactive dashboard.
+
+---
+
+# Project Objectives
+
+* Build a real-time PM2.5 forecasting pipeline.
+* Compare statistical and deep learning forecasting models.
+* Integrate Kafka, Spark, and Cassandra into a Big Data workflow.
+* Evaluate model performance using standard forecasting metrics.
+* Deploy a web dashboard for monitoring predictions and model outputs.
+
+---
 
 ## Live Demo
 
-**Dashboard:** 
+🌐 **Dashboard:** https://pm25-forecast-dashboard.streamlit.app/
 
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Demo-red?logo=streamlit)](https://pm25-forecast-dashboard.streamlit.app/)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live_Demo-red?logo=streamlit)](https://pm25-forecast-dashboard.streamlit.app/)
 
-## System Architecture
+---
 
-Kafka → Spark Structured Streaming → Forecasting Models → Cassandra → Streamlit Dashboard
+# System Architecture
 
-The platform continuously ingests air quality data, processes streaming records using Apache Spark, generates PM2.5 forecasts, stores prediction results in Cassandra, and visualizes outputs through an interactive dashboard.
+```text
+Data Source
+     │
+     ▼
+Apache Kafka
+     │
+     ▼
+Spark Structured Streaming
+     │
+     ▼
+Forecasting Models
+     │
+     ▼
+Apache Cassandra
+     │
+     ▼
+Streamlit Dashboard
+```
 
-## Key Features
+The system continuously receives air quality measurements, processes incoming streams using Spark Structured Streaming, performs PM2.5 forecasting, stores results in Cassandra, and visualizes outputs through Streamlit.
 
-### Real-Time Data Processing
+---
 
-* Stream ingestion and processing using Apache Kafka and Spark Structured Streaming.
-* Continuous generation of PM2.5 predictions from incoming environmental measurements.
-* Scalable architecture suitable for high-volume sensor data.
+# Dataset
 
-### Forecasting Models
+### Air Quality India Dataset
 
-Implemented and evaluated multiple forecasting approaches:
+Source: Kaggle
 
-**Statistical Models**
+Dataset Characteristics:
+
+| Attribute       | Value     |
+| --------------- | --------- |
+| Records         | 29,531    |
+| Cities          | 26        |
+| Period          | 2015–2020 |
+| Target Variable | PM2.5     |
+
+Main Features:
+
+* PM10
+* NO
+* NO₂
+* NOx
+* NH₃
+* CO
+* SO₂
+* O₃
+
+---
+
+# Forecasting Models
+
+## Statistical Models
 
 * AutoRegressive (AR)
 * SARIMA
 * Holt-Winters
 * Prophet
 
-**Deep Learning Models**
+## Deep Learning Models
 
 * Vanilla LSTM
 * Stacked LSTM
 * Bidirectional LSTM
 * CNN-LSTM
 * GRU
-* Hybrid Deep Learning Model
+* Hybrid Model
 
-Model performance is evaluated using:
+---
+
+# Model Evaluation
+
+Performance is evaluated using:
 
 * RMSE (Root Mean Squared Error)
 * MAE (Mean Absolute Error)
 * MAPE (Mean Absolute Percentage Error)
 
-### Interactive Dashboard
+Example comparison:
 
-* Real-time PM2.5 prediction interface.
-* Actual vs Predicted visualization.
-* Comparative model performance analysis.
-* Forecast quality metrics and trend monitoring.
-* Dataset and pipeline overview.
+| Model        | RMSE          | MAE   | MAPE   |
+| ------------ | ------------- | ----- | ------ |
+| AR           | 7.86          | 5.48  | 12.85% |
+| SARIMA       | 14.80         | 13.00 | 31.46% |
+| Holt-Winters | 10.72         | 8.15  | 18.24% |
+| Prophet      | 11.29         | 8.70  | 19.75% |
+| Stacked LSTM | Best DL Model | -     | -      |
 
-## Dataset
+---
 
-**Source:** Air Quality India Dataset (Kaggle)
+# Dashboard Features
 
-* 29,531 observations
-* 26 cities across India
-* Data period: 2015–2020
-* Air pollutant measurements including PM10, NOx, NO2, NH3, and PM2.5
+## Pipeline Monitoring
 
-## Technology Stack
+* Visualization of Spark prediction outputs.
+* Actual vs Predicted comparison charts.
+* Forecasting performance metrics.
 
-| Layer                | Technologies                           |
-| -------------------- | -------------------------------------- |
-| Programming Language | Python                                 |
-| Data Streaming       | Apache Kafka                           |
-| Stream Processing    | Apache Spark Structured Streaming      |
-| Data Storage         | Apache Cassandra                       |
-| Forecasting          | Statsmodels, Prophet, TensorFlow/Keras |
-| Visualization        | Streamlit                              |
+## Real-Time Prediction
 
-## Project Outcomes
+Users can input:
 
-* Developed an end-to-end real-time forecasting pipeline for air quality monitoring.
-* Compared traditional statistical forecasting techniques with deep learning architectures.
-* Demonstrated the integration of Big Data technologies for real-time environmental analytics.
-* Delivered an interactive dashboard for monitoring and evaluating forecast performance.
+* PM10
+* NOx
+* NO₂
+* NH₃
+
+and obtain PM2.5 forecasts generated by forecasting models.
+
+## Model Comparison
+
+Compare forecasting accuracy among:
+
+* Statistical models
+* Deep learning models
+* Hybrid approaches
+
+## Dataset Exploration
+
+* Dataset overview
+* Data distribution
+* Train/Test split information
+
+---
+
+# Technology Stack
+
+| Layer                | Technology                        |
+| -------------------- | --------------------------------- |
+| Programming Language | Python                            |
+| Data Streaming       | Apache Kafka                      |
+| Stream Processing    | Apache Spark Structured Streaming |
+| Data Storage         | Apache Cassandra                  |
+| Forecasting          | Statsmodels, Prophet, TensorFlow  |
+| Visualization        | Streamlit                         |
+
+---
+
+# Project Structure
+
+```text
+Realtime-PM2.5-Concentration-Forecasting-System
+│
+├── data/
+├── kafka/
+├── spark/
+├── models/
+├── cassandra/
+├── dashboard/
+├── notebooks/
+├── outputs/
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/trinhnth23521662/Realtime-PM2.5-Concentration-Forecasting-System.git
+
+cd Realtime-PM2.5-Concentration-Forecasting-System
+```
+
+## Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Activate environment:
+
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source .venv/bin/activate
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Running the System
+
+## Start Kafka
+
+```bash
+zookeeper-server-start.sh config/zookeeper.properties
+
+kafka-server-start.sh config/server.properties
+```
+
+## Start Spark Streaming
+
+```bash
+spark-submit streaming_pipeline.py
+```
+
+## Launch Dashboard
+
+```bash
+streamlit run app.py
+```
+
+---
+
+# Results
+
+* Successfully implemented a real-time forecasting pipeline using Kafka, Spark, and Cassandra.
+* Compared multiple statistical and deep learning forecasting techniques.
+* Demonstrated continuous prediction generation through Spark Structured Streaming.
+* Delivered an interactive dashboard for monitoring PM2.5 forecasts.
+
+---
+
+# Team Members
+
+| Full Name            | Student ID |
+| -------------------- | ---------- |
+| Nguyễn Thị Huệ Trinh | 23521662   |
+| Đinh Nguyễn Anh Thư  | 23521534   |
+| Tou Prong Ma Tiêm    | 23521566   |
+
+---
+
+# Acknowledgements
+
+This project was developed as part of the IE212 – Big Data Technologies course at the University of Information Technology (UIT), Vietnam National University Ho Chi Minh City.
